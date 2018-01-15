@@ -1,0 +1,41 @@
+CC=cl.exe
+
+OBJ_DIR=Debug
+SRC_DIR=src
+
+INCLUDE_FLAGS=-Iinclude    
+CFLAGS=/Fo"$(OBJ_DIR)\\" /c
+   
+
+OBJS = "$(OBJ_DIR)\ATM.obj"         \
+       "$(OBJ_DIR)\Account.obj"     \
+       "$(OBJ_DIR)\Bank.obj"        \
+       "$(OBJ_DIR)\BaseDisplay.obj" 
+
+       
+ALL: "$(OBJ_DIR)" $(OBJS)
+
+"$(OBJ_DIR)":
+    if not exist "$(OBJ_DIR)" mkdir "$(OBJ_DIR)"
+
+{$(SRC_DIR)}.cxx{$(OBJ_DIR)}.obj::
+   $(CC) $(INCLUDE_FLAGS) $(CFLAGS)  $< 
+   
+"$(OBJ_DIR)\ATM.obj":           $(SRC_DIR)\ATM.cxx          "$(OBJ_DIR)"
+"$(OBJ_DIR)\Account.obj":       $(SRC_DIR)\Account.cxx      "$(OBJ_DIR)"
+"$(OBJ_DIR)\Bank.obj":          $(SRC_DIR)\Bank.cxx         "$(OBJ_DIR)" 
+"$(OBJ_DIR)\BaseDisplay.obj":   $(SRC_DIR)\BaseDisplay.cxx  "$(OBJ_DIR)"
+
+    
+CLEAN:
+	-@erase "$(OBJ_DIR)\ATM.obj"
+	-@erase "$(OBJ_DIR)\Account.obj"
+	-@erase "$(OBJ_DIR)\Bank.obj"
+	-@erase "$(OBJ_DIR)\BaseDisplay.obj"
+
+	
+
+
+    
+
+
